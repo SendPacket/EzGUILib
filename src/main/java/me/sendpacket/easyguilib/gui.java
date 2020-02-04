@@ -7,13 +7,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class gui {
-    public gui(String name, String title_prefix, gui_window main_window)
+    public gui(String name, String title_prefix)
     {
         this.name = name;
         this.title_prefix = title_prefix;
-        this.main_window = main_window;
-        add_window(main_window);
         reset();
+    }
+
+    public void set_main_window(gui_window w)
+    {
+        this.main_window = w;
+        add_window(this.main_window);
     }
 
     public String get_title_prefix()
@@ -38,7 +42,7 @@ public class gui {
 
     public void close(Player p)
     {
-        this.get_player_list().put(p, -1); // Reset to main menu
+        //this.get_player_list().put(p, -1); // Reset to main menu
         for(gui_window window : get_windows())
         {
             for(gui_item item : window.gui_item_list)

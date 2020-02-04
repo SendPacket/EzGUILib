@@ -1,5 +1,6 @@
 package me.sendpacket.easyguilib;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -27,7 +28,10 @@ public class gui_item {
         this.material = material;
         this.slot = slot;
 
-        this.pressed = false;
+        for(Player p : Bukkit.getOnlinePlayers())
+        {
+            this.pressed.put(p, false);
+        }
     }
     public gui_item(String id, String display_name, String lore, int slot, Material material, int min, int max) // SLIDER
     {
@@ -80,7 +84,7 @@ public class gui_item {
                 this.lore = get_switch_list().get(this.current_switch_state).lore;
                 break;
             case button: // Button input should be handled elsewhere
-                this.pressed = true;
+                this.pressed.put(p, true);
                 break;
             case slider: // TODO
                 break;
@@ -102,6 +106,11 @@ public class gui_item {
         return this.material;
     }
 
+    public String get_display_name()
+    {
+        return this.display_name;
+    }
+
     public String get_lore()
     {
         return this.lore;
@@ -109,12 +118,12 @@ public class gui_item {
 
     public String get_id()
     {
-        return id;
+        return this.id;
     }
 
     public gui_item_type get_type()
     {
-        return type;
+        return this.type;
     }
 
     public void close(Player p)
@@ -133,8 +142,9 @@ public class gui_item {
     public int get_current_switch_state() { return current_switch_state; }
     public HashMap<Integer, gui_switch_state> get_switch_list() { return switch_list; }
     ///////////////////////// Button
-    boolean pressed;
-    public boolean is_pressed() { boolean old_pressed = pressed; pressed = false; return old_pressed;} // Once called, not pressed
+    HashMap<Player,Boolean> pressed = new HashMap<Player, Boolean>();
+    public boolean is_pressed(Player p) { return this.pressed.get(p);} // Once called, not pressed
+    public void not_pressed(Player p){this.pressed.put(p, false); };
     ///////////////////////// Slider
     int min, max;
     public int get_min() { return this.min; }

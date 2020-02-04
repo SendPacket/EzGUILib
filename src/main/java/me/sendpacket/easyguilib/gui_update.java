@@ -1,25 +1,28 @@
 package me.sendpacket.easyguilib;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 
-public class gui_update {
+public class gui_update implements Listener {
 
-    public void on_inventory_click(InventoryClickEvent e)
+    @EventHandler
+    public static void on_inventory_click(InventoryClickEvent e)
     {
         if (e.getWhoClicked() instanceof Player)
         {
             Player player = (Player) e.getWhoClicked();
-            Inventory inventory = e.getClickedInventory();
+            Inventory inventory = e.getInventory();
             int slot = e.getSlot();
 
             for(gui ui : gui_values.gui_list)
             {
                 for(gui_window window : ui.get_windows())
                 {
-                    if (inventory.equals(window.get_inventory())) // Is in valid window
+                    if (e.getView().getTitle().equalsIgnoreCase(window.get_title())) // Is in valid window
                     {
                         for(gui_item item : window.get_items())
                         {
@@ -36,7 +39,8 @@ public class gui_update {
         }
     }
 
-    public void on_inventory_close(InventoryCloseEvent e)
+    @EventHandler
+    public static void on_inventory_close(InventoryCloseEvent e)
     {
         if (e.getPlayer() instanceof  Player)
         {

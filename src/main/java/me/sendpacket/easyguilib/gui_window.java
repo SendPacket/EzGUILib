@@ -11,18 +11,26 @@ public class gui_window {
         this.name = name;
         this.size = size;
         this.parent = parent;
-        this.inventory = Bukkit.createInventory(null, size, this.parent.get_title_prefix() + " " + this.name);
+        this.title = this.parent.get_title_prefix() + " " + this.name;
+        this.inventory = Bukkit.createInventory(null, size, this.title);
+        this.id = id;
         gui_item_list = new ArrayList<gui_item>();
     }
 
     public Inventory get_inventory()
     {
+        generate_inventory();
         return this.inventory;
     }
 
     public ArrayList<gui_item> get_items()
     {
         return this.gui_item_list;
+    }
+
+    public String get_title()
+    {
+        return this.title;
     }
 
     public String get_name()
@@ -40,9 +48,17 @@ public class gui_window {
         return this.id;
     }
 
+    public void generate_inventory() {
+        this.inventory = Bukkit.createInventory(null, size, this.parent.get_title_prefix() + " " + this.name);
+
+        for (gui_item item : gui_item_list) {
+            this.inventory.setItem(item.slot, gui_utils.create_inventory_item(item.material, item.get_display_name(), item.get_lore()));
+        }
+    }
+
     Inventory inventory;
     ArrayList<gui_item> gui_item_list;
-    String name;
+    String name, title;
     gui parent;
     int size, id;
 }

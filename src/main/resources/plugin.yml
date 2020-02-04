@@ -1,0 +1,4 @@
+name: EzGUILib
+version: ${project.version}
+main: me.sendpacket.easyguilib.main
+api-version: 1.13
