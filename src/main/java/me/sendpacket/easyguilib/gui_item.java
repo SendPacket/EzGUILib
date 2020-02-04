@@ -25,7 +25,7 @@ public class gui_item {
         this.lore = lore;
         this.display_name = display_name;
         this.type = gui_item_type.button;
-        this.material = material;
+        this.material = Material.RED_STAINED_GLASS_PANE;
         this.slot = slot;
         this.is_return_button = true;
 
