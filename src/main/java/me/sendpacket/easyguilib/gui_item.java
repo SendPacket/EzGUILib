@@ -19,6 +19,21 @@ public class gui_item {
         this.lore = get_switch_list().get(this.current_switch_state).lore;
         this.switch_list = switch_list;
     }
+    public gui_item(String id, String display_name, String lore, int slot, int window_id_to_return) // RETURN BUTTON
+    {
+        this.id = id;
+        this.lore = lore;
+        this.display_name = display_name;
+        this.type = gui_item_type.button;
+        this.material = material;
+        this.slot = slot;
+        this.is_return_button = true;
+
+        for(Player p : Bukkit.getOnlinePlayers())
+        {
+            this.pressed.put(p, false);
+        }
+    }
     public gui_item(String id, String display_name, String lore, int slot, Material material) // BUTTON
     {
         this.id = id;
@@ -141,6 +156,11 @@ public class gui_item {
     int current_switch_state;
     public int get_current_switch_state() { return current_switch_state; }
     public HashMap<Integer, gui_switch_state> get_switch_list() { return switch_list; }
+    ///////////////////////// Return Button
+    int window_id_to_return;
+    boolean is_return_button;
+    public int get_window_id_to_return(){return window_id_to_return;};
+    public boolean is_return_button() { return this.is_return_button; };
     ///////////////////////// Button
     HashMap<Player,Boolean> pressed = new HashMap<Player, Boolean>();
     public boolean is_pressed(Player p) { return this.pressed.get(p);} // Once called, not pressed
