@@ -57,7 +57,7 @@ public class gui_window {
         this.inventory = Bukkit.createInventory(null, size, this.parent.get_title_prefix() + " " + this.name);
 
         for (gui_item item : gui_item_list) {
-            this.inventory.setItem(item.slot, gui_utils.create_inventory_item(item.material, item.get_display_name(), item.get_lore()));
+            this.inventory.setItem(item.get_slot(), gui_utils.create_inventory_item(item.get_material(), item.get_display_name(), item.get_lore()));
         }
     }
 

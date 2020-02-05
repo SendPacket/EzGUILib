@@ -45,10 +45,7 @@ public class gui {
         //this.get_player_list().put(p, -1); // Reset to main menu
         for(gui_window window : get_windows())
         {
-            for(gui_item item : window.gui_item_list)
-            {
-                item.close(p); // Reset sliders and selections
-            }
+            // TODO
         }
     }
 
