@@ -21,6 +21,7 @@ public class gui_item_returnbutton extends gui_item {
             this.pressed.put(p, 0);
         }
 
+        this.window_id_to_return = window_id_to_return;
         this.type = gui_item_type.return_button;
     }
 

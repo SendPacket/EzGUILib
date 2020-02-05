@@ -38,17 +38,4 @@ public class gui_update implements Listener {
             }
         }
     }
-
-    @EventHandler
-    public static void on_inventory_close(InventoryCloseEvent e)
-    {
-        if (e.getPlayer() instanceof  Player)
-        {
-            Player player = (Player) e.getPlayer();
-            for(gui ui : gui_values.gui_list)
-            {
-                ui.close(player);
-            }
-        }
-    }
 }
