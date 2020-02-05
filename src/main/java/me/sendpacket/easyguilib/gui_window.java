@@ -48,6 +48,11 @@ public class gui_window {
         return this.id;
     }
 
+    public void clear()
+    {
+        this.gui_item_list.clear();
+    }
+
     public void generate_inventory() {
         this.inventory = Bukkit.createInventory(null, size, this.parent.get_title_prefix() + " " + this.name);
 

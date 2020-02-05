@@ -28,7 +28,7 @@ public class gui_update implements Listener {
                         {
                             if(slot == item.get_slot())
                             {
-                                item.perform_action(player);
+                                item.perform_action(player, (e.isLeftClick() == true) ? 1 : (e.isRightClick() == true) ? 2 : 3);
                             }
                         }
                         gui_utils.update_inventory(player, window.get_inventory()); // Update inventory

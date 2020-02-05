@@ -15,6 +15,18 @@ public class gui_utils {
         p.openInventory(inv);
     }
 
+    public static gui_window get_window_by_id(gui g, int id)
+    {
+        for(gui_window w : g.get_windows())
+        {
+            if(w.get_id() == id)
+            {
+                return w;
+            }
+        }
+        return null;
+    }
+
     public static void open_gui(Player p, String name)
     {
         for(gui g : gui_values.gui_list) {

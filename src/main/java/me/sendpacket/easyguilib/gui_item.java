@@ -31,7 +31,7 @@ public class gui_item {
 
         for(Player p : Bukkit.getOnlinePlayers())
         {
-            this.pressed.put(p, false);
+            this.pressed.put(p, 0);
         }
     }
     public gui_item(String id, String display_name, String lore, int slot, Material material) // BUTTON
@@ -45,7 +45,7 @@ public class gui_item {
 
         for(Player p : Bukkit.getOnlinePlayers())
         {
-            this.pressed.put(p, false);
+            this.pressed.put(p, 0);
         }
     }
     public gui_item(String id, String display_name, String lore, int slot, Material material, int min, int max) // SLIDER
@@ -83,7 +83,7 @@ public class gui_item {
         this.items_to_select = selection_items;
     }
 
-    public void perform_action(Player p)
+    public void perform_action(Player p, int click_type)
     {
         switch(this.get_type())
         {
@@ -99,7 +99,7 @@ public class gui_item {
                 this.lore = get_switch_list().get(this.current_switch_state).lore;
                 break;
             case button: // Button input should be handled elsewhere
-                this.pressed.put(p, true);
+                this.pressed.put(p, click_type);
                 break;
             case slider: // TODO
                 break;
@@ -162,9 +162,9 @@ public class gui_item {
     public int get_window_id_to_return(){return window_id_to_return;};
     public boolean is_return_button() { return this.is_return_button; };
     ///////////////////////// Button
-    HashMap<Player,Boolean> pressed = new HashMap<Player, Boolean>();
-    public boolean is_pressed(Player p) { return this.pressed.get(p);} // Once called, not pressed
-    public void not_pressed(Player p){this.pressed.put(p, false); };
+    HashMap<Player,Integer> pressed = new HashMap<Player, Integer>();
+    public int pressed_value(Player p) { return this.pressed.get(p);} // Once called, not pressed
+    public void not_pressed(Player p){this.pressed.put(p, 0); };
     ///////////////////////// Slider
     int min, max;
     public int get_min() { return this.min; }
