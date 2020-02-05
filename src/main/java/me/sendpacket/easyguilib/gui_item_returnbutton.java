@@ -26,7 +26,6 @@ public class gui_item_returnbutton extends gui_item {
 
     public void perform_action(Player p, int click_type)
     {
-        p.sendMessage("PERFORM ACTION RETURN -> " + this.get_type());
         this.pressed.put(p, click_type);
     }
 
